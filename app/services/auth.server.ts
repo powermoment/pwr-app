@@ -21,7 +21,7 @@ authenticator.use(
       throw signError.message;
     }
 
-    const { data: profile, error: updateError } = await supabaseAdmin
+    const { data, error: updateError } = await supabaseAdmin
       .from("profiles")
       .upsert(
         {
@@ -34,14 +34,15 @@ authenticator.use(
               onConflict: "email",
             }
           : {}
-      );
+      )
+      .single();
 
     if (updateError) {
       console.error(updateError.message);
       throw updateError.message;
     }
 
-    return { user, profile };
+    return { user, data };
   }),
   "user-pass"
 );
@@ -61,18 +62,19 @@ authenticator.use(
         updated_at: new Date(),
       };
 
-      const { data: user, error } = await supabaseAdmin
+      const { data, error } = await supabaseAdmin
         .from("profiles")
         .upsert(updates, {
           onConflict: "email",
-        });
+        })
+        .single();
 
       if (error) {
         console.log(error.message);
         throw error.message;
       }
 
-      return { profile, accessToken, extraParams, user };
+      return { profile, accessToken, extraParams, data };
     }
   )
 );
