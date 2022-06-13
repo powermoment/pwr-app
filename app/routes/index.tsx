@@ -1,7 +1,18 @@
+import type { LoaderFunction } from "@remix-run/node";
+import { useLoaderData } from "@remix-run/react";
+import { authenticator } from "~/services/auth.server";
+
+export const loader: LoaderFunction = async ({ request }) => {
+  return await authenticator.isAuthenticated(request);
+}; 
+
 export default function Index() {
+  const data = useLoaderData();
+
   return (
     <div style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.4" }}>
       <h1>Welcome to Remix</h1>
+      {data ? <h4>Now you logged in!</h4> : <h4>Please, log in.</h4>}
       <ul>
         <li>
           <a
