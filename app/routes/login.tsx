@@ -1,28 +1,27 @@
 import { Form } from "@remix-run/react";
-import type { ActionFunction, LoaderFunction } from "@remix-run/node";
+import type { LoaderFunction } from "@remix-run/node";
 import { authenticator } from "~/services/auth.server";
+import React from "react";
 
 export default function Screen() {
   return (
-    <Form method="post">
-      <input type="email" name="email" required />
-      <input
-        type="password"
-        name="password"
-        autoComplete="current-password"
-        required
-      />
-      <button>Sign In</button>
-    </Form>
+    <React.Fragment>
+      <Form method="post" action="../auth/login">
+        <input type="email" name="email" required />
+        <input
+          type="password"
+          name="password"
+          autoComplete="current-password"
+          required
+        />
+        <button>Log In</button>
+      </Form>
+      <Form method="post" action="../auth/github">
+        <button>Log In via Github</button>
+      </Form>
+    </React.Fragment>
   );
 }
-
-export const action: ActionFunction = async ({ request }) => {
-  return await authenticator.authenticate("user-pass", request, {
-    successRedirect: "/",
-    failureRedirect: "/login",
-  });
-};
 
 export const loader: LoaderFunction = async ({ request }) => {
   return await authenticator.isAuthenticated(request, {

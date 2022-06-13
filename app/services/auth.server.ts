@@ -27,7 +27,7 @@ authenticator.use(
       callbackURL: process.env.GITHUB_CALLBACK_URL,
     },
     async ({ accessToken, extraParams, profile }) => {
-      return profile;
+      return { profile, accessToken, extraParams };
     }
   )
 );
