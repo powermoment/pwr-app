@@ -10,7 +10,7 @@ export default function Index() {
   const data = useLoaderData();
 
   return (
-    <div style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.4" }}>
+    <div>
       <h1 className="text-3xl font-bold underline">Welcome to Remix</h1>
       {data ? <h4>Now you logged in!</h4> : <h4>Please, log in.</h4>}
       {JSON.stringify(data)}

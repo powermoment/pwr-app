@@ -21,7 +21,18 @@ export const meta: MetaFunction = () => ({
 });
 
 export const links: LinksFunction = () => {
-  return [{ rel: "stylesheet", href: styles }];
+  return [
+    { rel: "stylesheet", href: styles },
+    {
+      rel: "preconnect",
+      href: "https://fonts.gstatic.com",
+      crossOrigin: "anonymous",
+    },
+    {
+      rel: "stylesheet",
+      href: "https://fonts.googleapis.com/css?family=Work+Sans:300,400,600,700&amp;lang=en",
+    },
+  ];
 };
 
 export const loader: LoaderFunction = async ({ request }) => {
