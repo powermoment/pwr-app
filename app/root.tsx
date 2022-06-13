@@ -12,6 +12,8 @@ import {
   ScrollRestoration,
   useLoaderData,
 } from "@remix-run/react";
+import AppLayout from "./components/AppLayout";
+import { authenticator } from "./services/auth.server";
 import styles from "./styles/app.css";
 
 export const meta: MetaFunction = () => ({
@@ -41,6 +43,7 @@ export const loader: LoaderFunction = async ({ request }) => {
       REACT_APP_SUPABASE_URL: process?.env?.REACT_APP_SUPABASE_URL,
       REACT_APP_SUPABASE_ANON_KEY: process?.env?.REACT_APP_SUPABASE_ANON_KEY,
     },
+    user: await authenticator.isAuthenticated(request),
   };
 };
 
@@ -54,7 +57,9 @@ export default function App() {
         <Links />
       </head>
       <body>
-        <Outlet />
+        <AppLayout user={data.user}>
+          <Outlet />
+        </AppLayout>
         <ScrollRestoration />
         {data && data.ENV && (
           <script
