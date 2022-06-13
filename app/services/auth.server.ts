@@ -1,20 +1,47 @@
 import { Authenticator } from "remix-auth";
 import { sessionStorage } from "~/services/session.server";
 import { FormStrategy } from "remix-auth-form";
-import { supabase } from "./supabase.server";
+import { supabase, supabaseAdmin } from "./supabase.server";
 import { GitHubStrategy } from "remix-auth-github";
 
 export const authenticator = new Authenticator(sessionStorage);
 
 authenticator.use(
   new FormStrategy(async ({ form }) => {
-    let email = form.get("email");
-    let password = form.get("password");
-    let user = await supabase.auth.api.signInWithEmail(
-      email?.toString()!,
-      password?.toString()!
-    );
-    return user;
+    const type = form.get("type");
+    const email = form.get("email");
+    const password = form.get("password");
+
+    const { data: user, error: signError } = await supabase.auth.api[
+      type === "sign_up" ? "signUpWithEmail" : "signInWithEmail"
+    ](email?.toString()!, password?.toString()!);
+
+    if (signError) {
+      console.error(signError.message);
+      throw signError.message;
+    }
+
+    const { data: profile, error: updateError } = await supabaseAdmin
+      .from("profiles")
+      .upsert(
+        {
+          email,
+          avatar_url: null,
+          updated_at: new Date(),
+        },
+        type === "sign_in"
+          ? {
+              onConflict: "email",
+            }
+          : {}
+      );
+
+    if (updateError) {
+      console.error(updateError.message);
+      throw updateError.message;
+    }
+
+    return { user, profile };
   }),
   "user-pass"
 );
@@ -27,7 +54,25 @@ authenticator.use(
       callbackURL: process.env.GITHUB_CALLBACK_URL,
     },
     async ({ accessToken, extraParams, profile }) => {
-      return { profile, accessToken, extraParams };
+      const updates = {
+        email: profile.emails ? profile.emails[0].value : null,
+        username: profile.displayName,
+        avatar_url: profile.photos[0].value,
+        updated_at: new Date(),
+      };
+
+      const { data: user, error } = await supabaseAdmin
+        .from("profiles")
+        .upsert(updates, {
+          onConflict: "email",
+        });
+
+      if (error) {
+        console.log(error.message);
+        throw error.message;
+      }
+
+      return { profile, accessToken, extraParams, user };
     }
   )
 );
