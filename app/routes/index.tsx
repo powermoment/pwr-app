@@ -17,6 +17,7 @@ export default function Index() {
       <ul>
         <li>
           <a
+            className="link link-primary"
             target="_blank"
             href="https://remix.run/tutorials/blog"
             rel="noreferrer"
@@ -26,6 +27,7 @@ export default function Index() {
         </li>
         <li>
           <a
+            className="link link-primary"
             target="_blank"
             href="https://remix.run/tutorials/jokes"
             rel="noreferrer"
@@ -34,7 +36,12 @@ export default function Index() {
           </a>
         </li>
         <li>
-          <a target="_blank" href="https://remix.run/docs" rel="noreferrer">
+          <a
+            className="link link-primary"
+            target="_blank"
+            href="https://remix.run/docs"
+            rel="noreferrer"
+          >
             Remix Docs
           </a>
         </li>
