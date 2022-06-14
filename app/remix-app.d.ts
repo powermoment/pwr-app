@@ -12,7 +12,7 @@ export type DBUser = {
 export type AuthenticatedUser = {
   user: Session | User | null;
   profile?: GitHubProfile;
-  data: { id: string };
+  data: DBUser;
 };
 
 declare global {
