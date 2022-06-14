@@ -13,6 +13,7 @@ import {
   useLoaderData,
 } from "@remix-run/react";
 import AppLayout from "./components/AppLayout";
+import type { AuthenticatedUser } from "./remix-app";
 import { authenticator } from "./services/auth.server";
 import styles from "./styles/app.css";
 
@@ -49,6 +50,7 @@ export const loader: LoaderFunction = async ({ request }) => {
 
 export default function App() {
   const data = useLoaderData();
+  const user = data.user as AuthenticatedUser;
 
   return (
     <html lang="en">
@@ -57,7 +59,7 @@ export default function App() {
         <Links />
       </head>
       <body>
-        <AppLayout user={data.user}>
+        <AppLayout user={user}>
           <Outlet />
         </AppLayout>
         <ScrollRestoration />

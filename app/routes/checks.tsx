@@ -21,15 +21,38 @@ export const action: ActionFunction = async ({ request }) => {
 
 const checks = () => {
   return (
-    <div className="card w-96 bg-base-100 shadow-xl">
-      <Form method="post">
-        <input
-          type="text"
-          placeholder="Title"
-          className="input input-bordered input-primary w-full max-w-xs"
-        />
-        <textarea className="textarea" placeholder="Body"></textarea>
-        <button>Send check</button>
+    <div className="max-w-screen-xl px-4 py-16 mx-auto sm:px-6 lg:px-8">
+      <Form method="post" className="max-w-md mx-auto mt-8 mb-0 space-y-4">
+        <div className="relative">
+          <label
+            className="block text-xs font-medium text-gray-500"
+            htmlFor="title"
+          >
+            Title
+          </label>
+          <input
+            className="w-full p-3 mt-1 text-sm border-2 border-gray-200 rounded"
+            id="title"
+            type="title"
+          />
+        </div>
+        <div className="relative">
+          <label className="sr-only" htmlFor="body">
+            Body
+          </label>
+          <textarea
+            className="w-full p-3 text-sm border-gray-200 rounded-lg"
+            placeholder="Body"
+            rows={8}
+            id="body"
+          ></textarea>
+        </div>
+        <button
+          type="submit"
+          className="inline-block px-5 py-3 text-sm font-medium text-white bg-blue-500 rounded-lg"
+        >
+          Submit
+        </button>
       </Form>
     </div>
   );

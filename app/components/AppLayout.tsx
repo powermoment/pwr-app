@@ -1,9 +1,9 @@
 import type { PropsWithChildren, ReactElement } from "react";
-import type { User } from "@supabase/supabase-js";
 import AppHeader from "./AppHeader";
+import type { AuthenticatedUser } from "~/remix-app";
 
 type AppLayoutProps = {
-  user?: { data: User };
+  user?: AuthenticatedUser;
 };
 
 const AppLayout = ({
@@ -12,9 +12,7 @@ const AppLayout = ({
 }: PropsWithChildren<AppLayoutProps>): ReactElement => {
   return (
     <>
-      <div className="header">
-        <AppHeader user={user?.data} />
-      </div>
+      <AppHeader user={user} />
       <div className="container mx-auto">{children}</div>
     </>
   );
