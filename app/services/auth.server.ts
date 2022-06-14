@@ -12,8 +12,21 @@ export const authenticator = new Authenticator<AuthenticatedUser>(
 authenticator.use(
   new FormStrategy(async ({ form }): Promise<AuthenticatedUser> => {
     const type = form.get("type");
+    const username = form.get("username");
     const email = form.get("email");
     const password = form.get("password");
+
+    if (type === "sign_up") {
+      const { data } = await supabase
+        .from("profiles")
+        .select()
+        .eq("username", username)
+        .single();
+      if (data) {
+        console.error("This username already taken");
+        throw "This username already taken";
+      }
+    }
 
     const { data: user, error: signError } = await supabase.auth.api[
       type === "sign_up" ? "signUpWithEmail" : "signInWithEmail"
@@ -27,11 +40,18 @@ authenticator.use(
     const { data, error: updateError } = await supabaseAdmin
       .from("profiles")
       .upsert(
-        {
-          email,
-          avatar_url: null,
-          updated_at: new Date(),
-        },
+        type === "sign_in"
+          ? {
+              email,
+              avatar_url: null,
+              updated_at: new Date(),
+            }
+          : {
+              email,
+              username,
+              avatar_url: null,
+              updated_at: new Date(),
+            },
         type === "sign_in"
           ? {
               onConflict: "email",
