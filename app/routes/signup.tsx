@@ -1,15 +1,27 @@
-import { Form, Link } from "@remix-run/react";
+import { Form, Link, useLoaderData } from "@remix-run/react";
 import type { LoaderFunction } from "@remix-run/node";
+import { json } from "@remix-run/node";
 import { authenticator } from "~/services/auth.server";
-import React from "react";
+import { useEffect } from "react";
+import { getSession } from "~/services/session.server";
+import toast from "react-hot-toast";
 
-export const loader: LoaderFunction = async ({ request }) => {
-  return await authenticator.isAuthenticated(request, {
-    successRedirect: "/",
-  });
+export let loader: LoaderFunction = async ({ request }) => {
+  await authenticator.isAuthenticated(request, { successRedirect: "/" });
+
+  let session = await getSession(request.headers.get("cookie"));
+  let error = session.get(authenticator.sessionErrorKey);
+
+  return json({ error });
 };
 
 export const Login = () => {
+  const { error } = useLoaderData();
+
+  useEffect(() => {
+    if (error?.message) toast(error?.message);
+  }, [error]);
+
   return (
     <div className="max-w-screen-xl px-4 py-16 mx-auto sm:px-6 lg:px-8">
       <div className="max-w-lg mx-auto text-center">
