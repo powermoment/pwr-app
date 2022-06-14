@@ -13,6 +13,7 @@ import {
   useLoaderData,
 } from "@remix-run/react";
 import AppLayout from "./components/AppLayout";
+import { Toaster } from "react-hot-toast";
 import type { AuthenticatedUser } from "./remix-app";
 import { authenticator } from "./services/auth.server";
 import styles from "./styles/app.css";
@@ -72,6 +73,7 @@ export default function App() {
         )}
         <Scripts />
         <LiveReload />
+        <Toaster />
       </body>
     </html>
   );
