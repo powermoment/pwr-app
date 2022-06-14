@@ -10,42 +10,16 @@ export default function Index() {
   const data = useLoaderData();
 
   return (
-    <div>
-      <h1 className="text-3xl font-bold underline">Welcome to Remix</h1>
-      {data ? <h4>Now you logged in!</h4> : <h4>Please, log in.</h4>}
-      {JSON.stringify(data)}
-      <ul>
-        <li>
-          <a
-            className="link link-primary"
-            target="_blank"
-            href="https://remix.run/tutorials/blog"
-            rel="noreferrer"
-          >
-            15m Quickstart Blog Tutorial
-          </a>
-        </li>
-        <li>
-          <a
-            className="link link-primary"
-            target="_blank"
-            href="https://remix.run/tutorials/jokes"
-            rel="noreferrer"
-          >
-            Deep Dive Jokes App Tutorial
-          </a>
-        </li>
-        <li>
-          <a
-            className="link link-primary"
-            target="_blank"
-            href="https://remix.run/docs"
-            rel="noreferrer"
-          >
-            Remix Docs
-          </a>
-        </li>
-      </ul>
+    <div className="max-w-screen-xl px-4 py-8 mx-auto sm:px-6 lg:px-8">
+      <div className="relative p-8 text-center border border-gray-200 rounded-lg">
+        <h2 className="text-2xl font-medium">There's nothing here...</h2>
+        <p className="mt-4 text-sm text-gray-500">
+          Created checkouts will appear here, try creating one!
+        </p>
+        <code className="mt-4 block break-words whitespace-normal">
+          {JSON.stringify(data)}
+        </code>
+      </div>
     </div>
   );
 }
