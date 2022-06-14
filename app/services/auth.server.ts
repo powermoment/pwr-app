@@ -22,20 +22,14 @@ authenticator.use(
         .select()
         .eq("username", username)
         .single();
-      if (data) {
-        console.error("This username already taken");
-        throw "This username already taken";
-      }
+      if (data) throw new Error("This username already taken");
     }
 
     const { data: user, error: signError } = await supabase.auth.api[
       type === "sign_up" ? "signUpWithEmail" : "signInWithEmail"
     ](email?.toString()!, password?.toString()!);
 
-    if (signError) {
-      console.error(signError.message);
-      throw signError.message;
-    }
+    if (signError) throw new Error(signError.message);
 
     const { data, error: updateError } = await supabaseAdmin
       .from("profiles")
@@ -60,11 +54,7 @@ authenticator.use(
       )
       .single();
 
-    if (updateError) {
-      console.error(updateError.message);
-      throw updateError.message;
-    }
-
+    if (updateError) throw new Error(updateError.message);
     return { user, data };
   }),
   "user-pass"
@@ -92,10 +82,7 @@ authenticator.use(
         })
         .single();
 
-      if (error) {
-        console.log(error.message);
-        throw error.message;
-      }
+      if (error) throw new Error(error.message);
 
       return { user: null, profile, accessToken, extraParams, data };
     }
