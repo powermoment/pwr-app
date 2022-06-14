@@ -3,11 +3,14 @@ import { sessionStorage } from "~/services/session.server";
 import { FormStrategy } from "remix-auth-form";
 import { supabase, supabaseAdmin } from "./supabase.server";
 import { GitHubStrategy } from "remix-auth-github";
+import type { AuthenticatedUser } from "~/remix-app";
 
-export const authenticator = new Authenticator(sessionStorage);
+export const authenticator = new Authenticator<AuthenticatedUser>(
+  sessionStorage
+);
 
 authenticator.use(
-  new FormStrategy(async ({ form }) => {
+  new FormStrategy(async ({ form }): Promise<AuthenticatedUser> => {
     const type = form.get("type");
     const email = form.get("email");
     const password = form.get("password");
@@ -74,7 +77,7 @@ authenticator.use(
         throw error.message;
       }
 
-      return { profile, accessToken, extraParams, data };
+      return { user: null, profile, accessToken, extraParams, data };
     }
   )
 );
