@@ -1,7 +1,6 @@
 import React from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { Fragment } from "react";
-import { ChevronDownIcon } from "@heroicons/react/solid";
 import type { AuthenticatedUser } from "~/remix-app";
 
 type Props = {

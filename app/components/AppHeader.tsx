@@ -12,18 +12,16 @@ const AppHeader = ({
   user,
 }: PropsWithChildren<AppHeaderProps>): ReactElement => {
   return (
-    <React.Fragment>
-      <header className="bg-gray-50">
-        <div className="max-w-screen-xl px-4 py-8 mx-auto sm:px-6 lg:px-8">
-          <div className="flex items-center sm:justify-between sm:gap-4">
-            <div className="flex items-center justify-between flex-1 gap-8 sm:justify-end">
-              <HeaderMenu />
-              <UserProfile user={user} />
-            </div>
+    <header className="bg-gray-50">
+      <div className="max-w-screen-xl px-4 py-8 mx-auto sm:px-6 lg:px-8">
+        <div className="flex items-center sm:justify-between sm:gap-4">
+          <div className="flex items-center justify-between flex-1 gap-8 sm:justify-end">
+            <HeaderMenu user={user} />
+            <UserProfile user={user} />
           </div>
         </div>
-      </header>
-    </React.Fragment>
+      </div>
+    </header>
   );
 };
 
