@@ -37,7 +37,6 @@ authenticator.use(
         type === "sign_in"
           ? {
               email,
-              avatar_url: null,
               updated_at: new Date(),
             }
           : {
