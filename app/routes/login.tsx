@@ -1,10 +1,16 @@
 import { Form, Link, useActionData } from "@remix-run/react";
-import type { ActionFunction } from "@remix-run/node";
+import type { ActionFunction, LoaderFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { authenticator } from "~/services/auth.server";
 import React, { useEffect } from "react";
 import toast from "react-hot-toast";
 import { AuthorizationError } from "remix-auth";
+
+export const loader: LoaderFunction = async ({ request }) => {
+  return await authenticator.isAuthenticated(request, {
+    successRedirect: "/",
+  });
+};
 
 export const action: ActionFunction = async ({ request }) => {
   try {
@@ -15,13 +21,12 @@ export const action: ActionFunction = async ({ request }) => {
   } catch (error) {
     if (error instanceof AuthorizationError)
       return json({ success: false, message: error.message });
-    return json({ success: false, error });
+    return error;
   }
 };
 
 export const Login = () => {
   const data = useActionData();
-  console.log(data);
 
   useEffect(() => {
     if (data?.message) toast(data?.message);
@@ -33,10 +38,7 @@ export const Login = () => {
         <h1 className="text-2xl font-bold sm:text-3xl">PowerMoment</h1>
         <p className="mt-4 text-gray-500">Take your power under control</p>
       </div>
-      <Form
-        method="post"
-        className="max-w-md mx-auto mt-8 mb-0 space-y-4"
-      >
+      <Form method="post" className="max-w-md mx-auto mt-8 mb-0 space-y-4">
         <div>
           <label htmlFor="email" className="sr-only">
             Email

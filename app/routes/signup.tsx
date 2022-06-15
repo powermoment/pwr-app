@@ -1,10 +1,16 @@
 import { Form, Link, useActionData } from "@remix-run/react";
-import type { ActionFunction } from "@remix-run/node";
+import type { ActionFunction, LoaderFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { authenticator } from "~/services/auth.server";
 import { useEffect } from "react";
 import toast from "react-hot-toast";
 import { AuthorizationError } from "remix-auth";
+
+export const loader: LoaderFunction = async ({ request }) => {
+  return await authenticator.isAuthenticated(request, {
+    successRedirect: "/",
+  });
+};
 
 export const action: ActionFunction = async ({ request }) => {
   try {
@@ -15,7 +21,7 @@ export const action: ActionFunction = async ({ request }) => {
   } catch (error) {
     if (error instanceof AuthorizationError)
       return json({ success: false, message: error.message });
-    return json({ success: false });
+    return error;
   }
 };
 
