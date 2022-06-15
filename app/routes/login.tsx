@@ -1,26 +1,31 @@
-import { Form, Link, useLoaderData } from "@remix-run/react";
-import type { LoaderFunction } from "@remix-run/node";
+import { Form, Link, useActionData } from "@remix-run/react";
+import type { ActionFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { authenticator } from "~/services/auth.server";
 import React, { useEffect } from "react";
-import { getSession } from "~/services/session.server";
 import toast from "react-hot-toast";
+import { AuthorizationError } from "remix-auth";
 
-export let loader: LoaderFunction = async ({ request }) => {
-  await authenticator.isAuthenticated(request, { successRedirect: "/" });
-
-  let session = await getSession(request.headers.get("cookie"));
-  let error = session.get(authenticator.sessionErrorKey);
-
-  return json({ error });
+export const action: ActionFunction = async ({ request }) => {
+  try {
+    return await authenticator.authenticate("user-pass", request, {
+      successRedirect: "/",
+      throwOnError: true,
+    });
+  } catch (error) {
+    if (error instanceof AuthorizationError)
+      return json({ success: false, message: error.message });
+    return json({ success: false, error });
+  }
 };
 
 export const Login = () => {
-  const { error } = useLoaderData();
+  const data = useActionData();
+  console.log(data);
 
   useEffect(() => {
-    if (error?.message) toast(error?.message);
-  }, [error]);
+    if (data?.message) toast(data?.message);
+  }, [data?.message]);
 
   return (
     <div className="max-w-screen-xl px-4 py-16 mx-auto sm:px-6 lg:px-8">
@@ -30,7 +35,6 @@ export const Login = () => {
       </div>
       <Form
         method="post"
-        action="../auth/login"
         className="max-w-md mx-auto mt-8 mb-0 space-y-4"
       >
         <div>

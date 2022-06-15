@@ -1,26 +1,30 @@
-import { Form, Link, useLoaderData } from "@remix-run/react";
-import type { LoaderFunction } from "@remix-run/node";
+import { Form, Link, useActionData } from "@remix-run/react";
+import type { ActionFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { authenticator } from "~/services/auth.server";
 import { useEffect } from "react";
-import { getSession } from "~/services/session.server";
 import toast from "react-hot-toast";
+import { AuthorizationError } from "remix-auth";
 
-export let loader: LoaderFunction = async ({ request }) => {
-  await authenticator.isAuthenticated(request, { successRedirect: "/" });
-
-  let session = await getSession(request.headers.get("cookie"));
-  let error = session.get(authenticator.sessionErrorKey);
-
-  return json({ error });
+export const action: ActionFunction = async ({ request }) => {
+  try {
+    return await authenticator.authenticate("user-pass", request, {
+      successRedirect: "/",
+      throwOnError: true,
+    });
+  } catch (error) {
+    if (error instanceof AuthorizationError)
+      return json({ success: false, message: error.message });
+    return json({ success: false });
+  }
 };
 
 export const Login = () => {
-  const { error } = useLoaderData();
+  const data = useActionData();
 
   useEffect(() => {
-    if (error?.message) toast(error?.message);
-  }, [error]);
+    if (data?.message) toast(data?.message);
+  }, [data?.message]);
 
   return (
     <div className="max-w-screen-xl px-4 py-16 mx-auto sm:px-6 lg:px-8">
@@ -28,11 +32,7 @@ export const Login = () => {
         <h1 className="text-2xl font-bold sm:text-3xl">PowerMoment</h1>
         <p className="mt-4 text-gray-500">Take your power under control</p>
       </div>
-      <Form
-        method="post"
-        action="../auth/login"
-        className="max-w-md mx-auto mt-8 mb-0 space-y-4"
-      >
+      <Form method="post" className="max-w-md mx-auto mt-8 mb-0 space-y-4">
         <div>
           <label htmlFor="username" className="sr-only">
             Username
