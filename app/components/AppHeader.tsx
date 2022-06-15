@@ -2,6 +2,7 @@ import type { PropsWithChildren, ReactElement } from "react";
 import { Link } from "react-router-dom";
 import React from "react";
 import type { AuthenticatedUser } from "~/remix-app";
+import UserProfile from "./UserProfile";
 
 type AppHeaderProps = {
   user?: AuthenticatedUser;
@@ -74,52 +75,7 @@ const AppHeader = ({
                 )}
               </div>
 
-              <button
-                type="button"
-                className="flex items-center transition rounded-lg group shrink-0"
-              >
-                {user?.data?.avatar_url ? (
-                  <img
-                    className="object-cover w-10 h-10 rounded-full"
-                    src={user?.data?.avatar_url}
-                    alt={user?.data?.username || "User avatar"}
-                  />
-                ) : (
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-10 w-10 text-gray-500"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                )}
-
-                <p className="ml-2 text-xs text-left sm:block">
-                  <strong className="block font-medium">
-                    {user?.data?.username}
-                  </strong>
-
-                  <span className="text-gray-500">{user?.data?.email}</span>
-                </p>
-
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="hidden w-5 h-5 ml-4 text-gray-500 transition group-hover:text-gray-700"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-              </button>
+              <UserProfile user={user} />
             </div>
           </div>
         </div>
