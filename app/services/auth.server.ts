@@ -59,18 +59,12 @@ authenticator.use(
   "user-pass"
 );
 
-const githubCallbackUrl = process.env.NETLIFY_DEV
-  ? process.env.GITHUB_CALLBACK_URL
-  : `${
-      process.env.DEPLOY_URL || process.env.DEPLOY_PRIME_URL || process.env.URL
-    }/auth/github/callback`;
-
 authenticator.use(
   new GitHubStrategy(
     {
       clientID: process.env.GITHUB_CLIENT_ID,
       clientSecret: process.env.GITHUB_CLIENT_SECRET,
-      callbackURL: githubCallbackUrl,
+      callbackURL: process.env.GITHUB_CALLBACK_URL,
     },
     async ({ accessToken, extraParams, profile }) => {
       const updates = {
