@@ -13,9 +13,9 @@ const AppHeader = ({
 }: PropsWithChildren<AppHeaderProps>): ReactElement => {
   return (
     <header className="bg-gray-50">
-      <div className="max-w-screen-xl px-4 py-8 mx-auto sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 lg:px-8">
         <div className="flex items-center sm:justify-between sm:gap-4">
-          <div className="flex items-center justify-between flex-1 gap-8 sm:justify-end">
+          <div className="flex flex-1 items-center justify-between gap-8 sm:justify-end">
             <HeaderMenu user={user} />
             <UserProfile user={user} />
           </div>

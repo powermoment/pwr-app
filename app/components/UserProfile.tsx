@@ -10,7 +10,7 @@ type Props = {
 const Avatar = ({ user }: { user?: AuthenticatedUser }) =>
   user?.data?.avatar_url ? (
     <img
-      className="object-cover w-10 h-10 rounded-full"
+      className="h-10 w-10 rounded-full object-cover"
       src={user?.data?.avatar_url}
       alt={user?.data?.username || "User avatar"}
     />
@@ -30,7 +30,7 @@ const Avatar = ({ user }: { user?: AuthenticatedUser }) =>
   );
 
 const Info = ({ user }: { user?: AuthenticatedUser }) => (
-  <p className="hidden ml-2 text-xs text-left md:block">
+  <p className="ml-2 hidden text-left text-xs md:block">
     <strong className="block font-medium">{user?.data?.username}</strong>
 
     <span className="text-gray-500">{user?.data?.email}</span>
@@ -46,14 +46,14 @@ const UserProfile = ({ user }: Props) => {
       </div>
       <Menu
         as="div"
-        className="z-1 relative md:hidden items-center transition rounded-lg group shrink-0"
+        className="z-1 group relative shrink-0 items-center rounded-lg transition md:hidden"
       >
-        <Menu.Button className="flex items-center transition rounded-lg group shrink-0">
+        <Menu.Button className="group flex shrink-0 items-center rounded-lg transition">
           <Avatar user={user} />
           <Info user={user} />
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="w-5 h-5 ml-4 text-gray-500 transition group-hover:text-gray-700"
+            className="ml-4 h-5 w-5 text-gray-500 transition group-hover:text-gray-700"
             viewBox="0 0 20 20"
             fill="currentColor"
           >
@@ -77,7 +77,7 @@ const UserProfile = ({ user }: Props) => {
           <Menu.Items className="absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
             <div className="px-1 py-1 ">
               <Menu.Item>
-                <p className="block p-2 ml-2 text-xs text-left">
+                <p className="ml-2 block p-2 text-left text-xs">
                   <strong className="block font-medium">
                     {user?.data?.username}
                   </strong>

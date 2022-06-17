@@ -21,9 +21,9 @@ export const action: ActionFunction = async ({ request }) => {
 
 const checks = () => {
   return (
-    <div className="max-w-screen-xl px-4 py-8 mx-auto sm:px-6 lg:px-8">
-      <div className="relative p-8 text-center border border-gray-200 rounded-lg">
-        <Form method="post" className="max-w-md mx-auto mt-8 mb-0 space-y-4">
+    <div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 lg:px-8">
+      <div className="relative rounded-lg border border-gray-200 p-8 text-center">
+        <Form method="post" className="mx-auto mt-8 mb-0 max-w-md space-y-4">
           <div className="relative">
             <label
               className="block text-xs font-medium text-gray-500"
@@ -32,7 +32,7 @@ const checks = () => {
               Title
             </label>
             <input
-              className="w-full p-3 mt-1 text-sm border-2 border-gray-200 rounded"
+              className="mt-1 w-full rounded border-2 border-gray-200 p-3 text-sm"
               id="title"
               type="title"
             />
@@ -42,7 +42,7 @@ const checks = () => {
               Body
             </label>
             <textarea
-              className="w-full p-3 text-sm border-gray-200 rounded-lg"
+              className="w-full rounded-lg border-gray-200 p-3 text-sm"
               placeholder="Body"
               rows={8}
               id="body"
@@ -50,7 +50,7 @@ const checks = () => {
           </div>
           <button
             type="submit"
-            className="inline-block px-5 py-3 text-sm font-medium text-white bg-blue-500 rounded-lg"
+            className="inline-block rounded-lg bg-blue-500 px-5 py-3 text-sm font-medium text-white"
           >
             Submit
           </button>

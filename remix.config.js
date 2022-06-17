@@ -1,7 +1,7 @@
 /**
  * @type {import('@remix-run/dev').AppConfig}
  */
- module.exports = {
+module.exports = {
   serverBuildTarget: "netlify",
   server: "./server.js",
   ignoredRouteFiles: ["**/.*"],

@@ -33,12 +33,12 @@ export const Login = () => {
   }, [data?.message]);
 
   return (
-    <div className="max-w-screen-xl px-4 py-16 mx-auto sm:px-6 lg:px-8">
-      <div className="max-w-lg mx-auto text-center">
+    <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-lg text-center">
         <h1 className="text-2xl font-bold sm:text-3xl">PowerMoment</h1>
         <p className="mt-4 text-gray-500">Take your power under control</p>
       </div>
-      <Form method="post" className="max-w-md mx-auto mt-8 mb-0 space-y-4">
+      <Form method="post" className="mx-auto mt-8 mb-0 max-w-md space-y-4">
         <div>
           <label htmlFor="username" className="sr-only">
             Username
@@ -48,14 +48,14 @@ export const Login = () => {
             <input
               name="username"
               type="text"
-              className="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
+              className="w-full rounded-lg border-gray-200 p-4 pr-12 text-sm shadow-sm"
               placeholder="Enter username"
             />
 
-            <span className="absolute inset-y-0 inline-flex items-center right-4">
+            <span className="absolute inset-y-0 right-4 inline-flex items-center">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="w-6 h-6 text-gray-400"
+                className="h-6 w-6 text-gray-400"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -80,14 +80,14 @@ export const Login = () => {
             <input
               name="email"
               type="email"
-              className="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
+              className="w-full rounded-lg border-gray-200 p-4 pr-12 text-sm shadow-sm"
               placeholder="Enter email"
             />
 
-            <span className="absolute inset-y-0 inline-flex items-center right-4">
+            <span className="absolute inset-y-0 right-4 inline-flex items-center">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="w-5 h-5 text-gray-400"
+                className="h-5 w-5 text-gray-400"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -111,14 +111,14 @@ export const Login = () => {
             <input
               name="password"
               type="password"
-              className="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
+              className="w-full rounded-lg border-gray-200 p-4 pr-12 text-sm shadow-sm"
               placeholder="Enter password"
             />
 
-            <span className="absolute inset-y-0 inline-flex items-center right-4">
+            <span className="absolute inset-y-0 right-4 inline-flex items-center">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="w-5 h-5 text-gray-400"
+                className="h-5 w-5 text-gray-400"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -158,7 +158,7 @@ export const Login = () => {
 
           <button
             type="submit"
-            className="inline-block px-5 py-3 ml-3 text-sm font-medium text-white bg-blue-500 rounded-lg"
+            className="ml-3 inline-block rounded-lg bg-blue-500 px-5 py-3 text-sm font-medium text-white"
           >
             Sign Up
           </button>

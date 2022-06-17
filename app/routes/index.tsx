@@ -10,9 +10,9 @@ export default function Index() {
   const data = useLoaderData();
 
   return (
-    <div className="max-w-screen-xl px-4 py-8 mx-auto sm:px-6 lg:px-8">
-      <div className="relative p-8 text-center border border-gray-200 rounded-lg">
-        <code className="mt-4 block break-words whitespace-normal">
+    <div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 lg:px-8">
+      <div className="relative rounded-lg border border-gray-200 p-8 text-center">
+        <code className="mt-4 block whitespace-normal break-words">
           {JSON.stringify(data)}
         </code>
       </div>
