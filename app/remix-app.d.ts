@@ -10,6 +10,9 @@ export type DBUser = {
   role: string;
 };
 
+// TODO: Move at another .d.ts file
+export type Reason = { id: string; name: string };
+
 export type AuthenticatedUser = {
   user: Session | User | null;
   profile?: GitHubProfile;

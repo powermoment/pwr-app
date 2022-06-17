@@ -1,17 +1,18 @@
+import { Link } from "@remix-run/react";
 import React from "react";
 
 type MenuItem = {
+  id: string;
   name: string;
-  value: string;
 };
 
 type MenuProps = {
-  current: string;
+  currentId?: string;
   items: MenuItem[];
   onChange?: (name: string) => void;
 };
 
-const Menu = ({ current, items, onChange }: MenuProps) => {
+const Menu = ({ currentId, items, onChange }: MenuProps) => {
   const className =
     "block px-4 py-2 text-sm font-medium text-gray-500 rounded-lg hover:bg-gray-100 hover:text-gray-700 text-right";
   const activeClassName =
@@ -25,14 +26,15 @@ const Menu = ({ current, items, onChange }: MenuProps) => {
     <div className="w-80">
       <nav className="flex flex-col space-y-1 px-6">
         {items.map((item) => (
-          <button
-            key={item.name}
-            className={current === item.name ? activeClassName : className}
-            onClick={handleItemClick(item.name)}
+          <Link
+            key={item.id}
+            to={item.id}
+            className={currentId === item.id ? activeClassName : className}
+            onClick={handleItemClick(item.id)}
           >
-            <span className="mx-4 text-lg font-normal">{item.value}</span>
+            <span className="mx-4 text-lg font-normal">{item.name}</span>
             <span className="flex-grow text-right"></span>
-          </button>
+          </Link>
         ))}
       </nav>
     </div>
