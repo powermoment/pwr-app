@@ -7,6 +7,7 @@ export type DBUser = {
   username: string | null;
   avatar_url: string | null;
   updated_at: string;
+  role: string;
 };
 
 export type AuthenticatedUser = {
