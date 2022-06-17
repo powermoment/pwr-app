@@ -1,4 +1,4 @@
-const checks = () => {
+const Checks = () => {
   return (
     <div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 lg:px-8">
       <div className="relative rounded-lg border border-gray-200 p-8 text-center">
@@ -11,4 +11,4 @@ const checks = () => {
   );
 };
 
-export default checks;
+export default Checks;
