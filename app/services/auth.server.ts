@@ -67,6 +67,7 @@ authenticator.use(
       callbackURL: process.env.GITHUB_CALLBACK_URL,
     },
     async ({ accessToken, extraParams, profile }) => {
+      // TODO: Change updates fields if we already has user in DB
       const updates = {
         email: profile.emails ? profile.emails[0].value : null,
         username: profile.displayName,
