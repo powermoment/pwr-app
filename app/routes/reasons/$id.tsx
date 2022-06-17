@@ -3,6 +3,8 @@ import { Form, useOutletContext, useParams } from "@remix-run/react";
 import { useEffect, useMemo, useState } from "react";
 import type { Reason } from "~/remix-app";
 
+const EMPTY_REASON = { name: "Reason name" };
+
 export const action: ActionFunction = async ({ request }) => {
   const form = await request.formData();
   const id = form.get("id");
@@ -27,9 +29,9 @@ const ReasonForm = () => {
     setForm(reason);
   }, [reason]);
 
-  if (!reason) {
-    return <div>Something went wrong...</div>;
-  }
+  useEffect(() => {
+    if (id === "create") setForm(EMPTY_REASON);
+  }, [id]);
 
   // TODO: Use formik as ex.
   const handleFieldChange =
@@ -41,6 +43,7 @@ const ReasonForm = () => {
     <Form method="post" className="relative mx-auto mb-0 space-y-4">
       <div>
         <div className="relative">
+          <input hidden defaultValue={form?.id} name="id" />
           <input
             type="text"
             className="w-full rounded-lg border-gray-200 p-4 pr-12 text-sm shadow-sm"

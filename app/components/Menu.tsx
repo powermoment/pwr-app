@@ -25,6 +25,28 @@ const Menu = ({ currentId, items, onChange }: MenuProps) => {
   return (
     <div className="w-80">
       <nav className="flex flex-col space-y-1 px-6">
+        <div className="ml-auto mb-2 mr-6 flex items-center space-x-4 hover:space-x-1">
+          <Link
+            to="/reasons/create"
+            className="z-10 block rounded-full border-2 border-white bg-green-100 p-4 text-green-700 transition-all hover:scale-110 focus:outline-none focus:ring active:bg-green-50"
+            type="button"
+          >
+            <svg
+              className="h-4 w-4"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+              />
+            </svg>
+          </Link>
+        </div>
         {items.map((item) => (
           <Link
             key={item.id}
