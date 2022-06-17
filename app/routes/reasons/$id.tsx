@@ -1,16 +1,34 @@
-import type { ActionFunction } from "@remix-run/node";
-import { Form, useOutletContext, useParams } from "@remix-run/react";
+import type { ActionFunction} from "@remix-run/node";
+import { json } from "@remix-run/node";
+import {
+  Form,
+  useActionData,
+  useOutletContext,
+  useParams,
+} from "@remix-run/react";
 import { useEffect, useMemo, useState } from "react";
+import { useToastTransition } from "~/hooks/useToastTransition";
 import type { Reason } from "~/remix-app";
+import { supabase } from "~/services/supabase.server";
 
 const EMPTY_REASON = { name: "Reason name" };
 
 export const action: ActionFunction = async ({ request }) => {
   const form = await request.formData();
-  const id = form.get("id");
-  const name = form.get("name");
+  const id = form.get("id")?.toString();
+  const name = form.get("name")?.toString();
 
-  console.log(id, name);
+  if (id) {
+    const { error } = await supabase
+      .from("reasons")
+      .update({ name })
+      .eq("id", id);
+    if (error) return json({ message: error.message });
+    return null;
+  }
+
+  const { error } = await supabase.from("reasons").upsert({ name });
+  if (error) return json({ message: error.message });
 
   return null;
 };
@@ -19,6 +37,9 @@ const ReasonForm = () => {
   const { id } = useParams();
   const { reasons } = useOutletContext<{ reasons: Reason[] }>();
   const [form, setForm] = useState<Partial<Reason>>();
+  const data = useActionData();
+
+  useToastTransition(data?.message);
 
   const reason = useMemo(
     () => reasons.find((el) => el.id === id),
