@@ -13,17 +13,17 @@ type MenuProps = {
 
 const Menu = ({ current, items, onChange }: MenuProps) => {
   const className =
-    "my-6 flex items-center rounded-lg p-2 text-gray-600 transition-colors duration-200 hover:bg-gray-100 hover:text-gray-800  dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white";
+    "block px-4 py-2 text-sm font-medium text-gray-500 rounded-lg hover:bg-gray-100 hover:text-gray-700 text-right";
   const activeClassName =
-    "hover:text-gray-800 hover:bg-gray-100 flex items-center p-2 my-6 transition-colors dark:hover:text-white dark:hover:bg-gray-600 duration-200  text-gray-800 dark:text-gray-100 rounded-lg bg-gray-100 dark:bg-gray-600";
+    "block px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 rounded-lg text-right";
 
   const handleItemClick = (name: string) => () => {
     onChange && onChange(name);
   };
 
   return (
-    <div className="w-72 md:h-screen">
-      <nav className="mb-10 md:mb-0 md:px-6 ">
+    <div className="w-80">
+      <nav className="flex flex-col space-y-1 px-6">
         {items.map((item) => (
           <button
             key={item.name}
