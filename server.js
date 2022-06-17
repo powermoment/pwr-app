@@ -43,5 +43,6 @@ function getLoadContext(event, context) {
 export const handler = createRequestHandler({
   build,
   getLoadContext,
+  // eslint-disable-next-line no-undef
   mode: process.env.NODE_ENV,
 });
