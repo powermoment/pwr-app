@@ -1,10 +1,9 @@
-import { Form, Link, useActionData } from "@remix-run/react";
+import { Form, Link, useActionData, useTransition } from "@remix-run/react";
 import type { ActionFunction, LoaderFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { authenticator } from "~/services/auth.server";
-import { useEffect } from "react";
-import toast from "react-hot-toast";
 import { AuthorizationError } from "remix-auth";
+import { useToastTransition } from "~/hooks/useToastTransition";
 
 export const loader: LoaderFunction = async ({ request }) => {
   return await authenticator.isAuthenticated(request, {
@@ -27,13 +26,16 @@ export const action: ActionFunction = async ({ request }) => {
 
 export const Login = () => {
   const data = useActionData();
+  const { state } = useTransition();
 
-  useEffect(() => {
-    if (data?.message) toast(data?.message);
-  }, [data?.message]);
+  useToastTransition(data?.message);
 
   return (
-    <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
+    <div
+      className={`${
+        state === "submitting" ? "pointer-events-none animate-pulse" : ""
+      } mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8`}
+    >
       <div className="mx-auto max-w-lg text-center">
         <h1 className="text-2xl font-bold sm:text-3xl">PowerMoment</h1>
         <p className="mt-4 text-gray-500">Take your power under control</p>
