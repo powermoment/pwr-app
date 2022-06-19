@@ -3,6 +3,7 @@ import { Menu, Transition } from "@headlessui/react";
 import { Fragment } from "react";
 import type { AuthenticatedUser } from "~/remix-app";
 import Avatar from "./Avatar";
+import { Link } from "@remix-run/react";
 
 type Props = {
   user?: AuthenticatedUser;
@@ -25,7 +26,7 @@ const UserProfile = ({ user }: Props) => {
       </div>
       <Menu
         as="div"
-        className="z-1 group relative shrink-0 items-center rounded-lg transition md:hidden"
+        className="group relative shrink-0 items-center rounded-lg transition md:hidden"
       >
         <Menu.Button className="group flex shrink-0 items-center rounded-lg transition">
           <Avatar user={user} />
@@ -53,16 +54,24 @@ const UserProfile = ({ user }: Props) => {
           leaveFrom="transform opacity-100 scale-100"
           leaveTo="transform opacity-0 scale-95"
         >
-          <Menu.Items className="absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-            <div className="px-1 py-1 ">
+          <Menu.Items className="z-10 absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+            <div className="divide-y divide-dashed">
               <Menu.Item>
-                <p className="ml-2 block p-2 text-left text-xs">
+                <p className="ml-1 block p-3 text-left text-xs">
                   <strong className="block font-medium">
                     {user?.data?.username}
                   </strong>
 
                   <span className="text-gray-500">{user?.data?.email}</span>
                 </p>
+              </Menu.Item>
+              <Menu.Item>
+                <Link
+                  to="/logout"
+                  className="ml-1 text-red-400 flex p-3 text-left align-middle text-xs"
+                >
+                  Logout
+                </Link>
               </Menu.Item>
             </div>
           </Menu.Items>
