@@ -87,11 +87,13 @@ const MoodSlider = ({ value, onChange }: MoodSliderProps) => {
         <svg
           className="moodSlider__bar"
           xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 254.7 10.42"
+          viewBox="0 0 254.73 17.01"
         >
-          <g fill="currentColor">
-            <path d="M3.11 4.08 244 0c14.34 0 14.34 10.42 0 10.42L3.11 6.91c-4.11 0-4.11-2.83 0-2.83Z" />
-          </g>
+          <path
+            fill="currentColor"
+            d="M3.08 6.66 244 0c14.34 0 14.34 17 0 17L3.08 11.28c-4.08 0-4.08-4.62 0-4.62Z"
+            data-name="Слой 1-2"
+          />
         </svg>
       </div>
     </div>
