@@ -16,7 +16,7 @@ const MoodForm = () => {
   return (
     <div
       className={`${
-        showReasons ? "-mt-32" : "-mt-12"
+        showReasons ? "-mt-24" : "-mt-12"
       } transition-margin duration-250 flex h-screen items-center justify-center transition-all`}
     >
       <Form
