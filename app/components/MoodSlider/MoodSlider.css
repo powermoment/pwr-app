@@ -1,6 +1,7 @@
 .moodSlider {
   position: relative;
   width: 100%;
+  max-width: 450px;
 }
 
 .moodSlider__input {
@@ -9,7 +10,6 @@
   top: 0;
   width: 100%;
   z-index: 1;
-  height: 28px;
   cursor: pointer;
 }
 
@@ -23,7 +23,7 @@
 .moodSlider__bar {
   position: absolute;
   left: 0;
-  top: 0;
+  top: -0.55em;
   right: 0;
   width: 100%;
   color: currentColor;

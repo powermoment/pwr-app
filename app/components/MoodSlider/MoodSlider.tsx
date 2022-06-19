@@ -66,7 +66,7 @@ const MoodSlider = () => {
   };
 
   return (
-    <div className="flex flex-col space-y-2">
+    <div className="flex flex-col space-y-4">
       <span className="mr-auto">{getLabelByValue(value)}</span>
       <div className="moodSlider" style={{ color }}>
         <input
