@@ -1,6 +1,8 @@
 import type { ActionFunction, LinksFunction } from "@remix-run/node";
 import { Form } from "@remix-run/react";
-import MoodSlider, { links as moodSliderLinks } from "~/components/MoodSlider";
+import MoodSlider, {
+  links as moodSliderLinks,
+} from "~/components/MoodSlider/MoodSlider";
 import { authenticator } from "~/services/auth.server";
 import { supabase } from "~/services/supabase.server";
 
