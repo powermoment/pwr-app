@@ -27,13 +27,15 @@ export const action: ActionFunction = async ({ request }) => {
 
 const CreateCheck = () => {
   return (
-    <div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 lg:px-8">
-      <div className="relative rounded-lg border border-gray-200 p-6 text-center">
-        <MoodForm />
-        <Form
-          method="post"
-          className="mx-auto mt-8 mb-0 max-w-md space-y-4"
-        ></Form>
+    <div className="-mt-12 flex h-screen items-center justify-center">
+      <div className="w-full px-4 py-8 sm:px-6 lg:px-8">
+        <div className="relative rounded-lg border border-gray-200 p-6 text-center">
+          <MoodForm />
+          <Form
+            method="post"
+            className="mx-auto mt-8 mb-0 max-w-md space-y-4"
+          ></Form>
+        </div>
       </div>
     </div>
   );
