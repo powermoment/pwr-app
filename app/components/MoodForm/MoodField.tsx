@@ -10,17 +10,17 @@ export const links: LinksFunction = () => {
   return [...moodSliderLinks(), ...woobleStyles()];
 };
 
-type MoodFormProps = {
-  onChange: (value: string) => void;
+type MoodFieldProps = {
+  onSubmit: (value: string) => void;
 };
 
 const DEFAULT_VALIE = "3";
 
-const MoodForm = ({ onChange }: MoodFormProps) => {
+const MoodField = ({ onSubmit }: MoodFieldProps) => {
   const [moodValue, setMoodValue] = useState<string>(DEFAULT_VALIE);
 
   const handleMoodChange = (value: string) => setMoodValue(value);
-  const handleSubmit = () => onChange(moodValue);
+  const handleSubmit = () => onSubmit(moodValue);
 
   return (
     <div className="flex flex-col space-y-16">
@@ -28,6 +28,7 @@ const MoodForm = ({ onChange }: MoodFormProps) => {
       <MoodSlider value={moodValue} onChange={handleMoodChange} />
       <div className="flex">
         <button
+          type="button"
           onClick={handleSubmit}
           className="group relative inline-block w-full text-sm font-medium text-pwr focus:outline-none focus:ring active:text-pwr"
         >
@@ -41,4 +42,4 @@ const MoodForm = ({ onChange }: MoodFormProps) => {
   );
 };
 
-export default MoodForm;
+export default MoodField;
