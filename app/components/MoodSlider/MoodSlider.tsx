@@ -76,6 +76,7 @@ const MoodSlider = ({ value, onChange }: MoodSliderProps) => {
       <div className="moodSlider" style={{ color }}>
         <input
           type="range"
+          name="mood"
           min="0"
           max="6"
           step="1"
