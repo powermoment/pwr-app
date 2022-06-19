@@ -1,0 +1,72 @@
+:root {
+  --deg: 1;
+  --x: -50%;
+  --y: -50%;
+}
+
+.wooble__spark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(var(--x, -50%), var(--y, -50%)) rotate(0deg);
+  font-size: 20vmin;
+  width: 1em;
+  height: 1em;
+  border-radius: 90% 95% 85% 105%;
+  background: #9254de;
+  mix-blend-mode: screen;
+  filter: hue-rotate(0deg);
+  -webkit-animation: wobble calc(150ms * var(--t)) linear infinite;
+  animation: wobble calc(150ms * var(--t)) linear infinite;
+  transform-origin: -var(--y) -var(--x);
+  box-shadow: 0 0 0.5em 0.2em #000 inset, 0 0 0.15em 0 #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.wooble__spark::after {
+  font-size: 1em;
+  white-space: nowrap;
+}
+.wooble__spark:nth-child(1) {
+  --x: -53%;
+  --y: -53%;
+  --t: 37;
+}
+.wooble__spark:nth-child(2) {
+  --x: -47%;
+  --y: -52%;
+  --t: 58;
+}
+.wooble__spark:nth-child(3) {
+  --x: -45%;
+  --y: -50%;
+  --t: 46;
+}
+.wooble__spark:nth-child(4) {
+  --x: -53%;
+  --y: -45%;
+  --t: 72;
+}
+.wooble__spark:nth-child(5) {
+  --x: -55%;
+  --y: -45%;
+  --t: 62;
+}
+
+@-webkit-keyframes wobble {
+  to {
+    transform: translate(var(--x), var(--y)) rotate(360deg);
+  }
+}
+
+@keyframes wobble {
+  to {
+    transform: translate(var(--x), var(--y)) rotate(360deg);
+  }
+}
+.wooble {
+  min-height: 20vmin;
+  width: 100%;
+  position: relative;
+}
