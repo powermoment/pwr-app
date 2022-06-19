@@ -66,7 +66,7 @@ const UserProfile = ({ user }: Props) => {
               <Menu.Item>
                 <Link
                   to="/reasons"
-                  className="ml-1 flex p-3 text-left align-middle text-xs text-red-400"
+                  className="ml-1 flex p-3 text-left align-middle text-xs text-pwr"
                 >
                   Manage Reasons
                 </Link>
