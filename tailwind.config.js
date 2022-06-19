@@ -8,6 +8,9 @@ module.exports = {
       fontFamily: {
         sans: ["Work Sans", ...defaultTheme.fontFamily.sans],
       },
+      colors: {
+        pwr: "#E6C37D",
+      },
     },
   },
   plugins: [require("@tailwindcss/forms")],
