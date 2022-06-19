@@ -1,5 +1,5 @@
 import type { LinksFunction } from "@remix-run/node";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { ChangeEvent } from "react";
 
 import moodSliderStyles from "./MoodSlider.css";
@@ -10,7 +10,7 @@ export const links: LinksFunction = () => {
 
 // Palette from Ant.d
 // https://ant.design/docs/spec/colors
-const getColorByValue = (value: string) => {
+export const getMoodColorByValue = (value?: string) => {
   switch (value) {
     case "0":
       return "#9254de";
@@ -33,7 +33,7 @@ const getColorByValue = (value: string) => {
   }
 };
 
-const getLabelByValue = (value: string) => {
+export const getMoodLabelByValue = (value: string) => {
   switch (value) {
     case "0":
       return "Ужасное";
@@ -54,20 +54,29 @@ const getLabelByValue = (value: string) => {
   }
 };
 
-const MoodSlider = () => {
+type MoodSliderProps = {
+  // TODO: Maybe convert to number?
+  onChange: (value: string) => void;
+};
+
+const MoodSlider = ({ onChange }: MoodSliderProps) => {
   const defaultValue = "3";
 
   const [value, setValue] = useState<string>(defaultValue);
-  const [color, setColor] = useState<string>(getColorByValue(value));
+  const [color, setColor] = useState<string>(getMoodColorByValue(value));
+
+  useEffect(() => {
+    onChange(value);
+  }, [onChange, value]);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value);
-    setColor(getColorByValue(e.target.value));
+    setColor(getMoodColorByValue(e.target.value));
   };
 
   return (
     <div className="flex flex-col space-y-4">
-      <span className="mr-auto">{getLabelByValue(value)}</span>
+      <span className="mr-auto">{getMoodLabelByValue(value)}</span>
       <div className="moodSlider" style={{ color }}>
         <input
           type="range"

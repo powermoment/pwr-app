@@ -1,9 +1,3 @@
-:root {
-  --deg: 1;
-  --x: -50%;
-  --y: -50%;
-}
-
 .wooble__spark {
   position: absolute;
   top: 50%;
@@ -13,7 +7,7 @@
   width: 1em;
   height: 1em;
   border-radius: 90% 95% 85% 105%;
-  background: #9254de;
+  background: currentColor;
   mix-blend-mode: screen;
   filter: hue-rotate(0deg);
   -webkit-animation: wobble calc(150ms * var(--t)) linear infinite;
