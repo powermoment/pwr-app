@@ -1,7 +1,16 @@
-import type { ActionFunction, LinksFunction } from "@remix-run/node";
-import { Form } from "@remix-run/react";
-import MoodForm, { links as moodFormLinks } from "~/components/MoodForm";
-
+import type {
+  ActionFunction,
+  LinksFunction,
+  LoaderFunction,
+} from "@remix-run/node";
+import { redirect } from "@remix-run/node";
+import { json } from "@remix-run/node";
+import { useActionData, useTransition } from "@remix-run/react";
+import MoodForm, {
+  links as moodFormLinks,
+} from "~/components/MoodForm/MoodForm";
+import { useToastTransition } from "~/hooks/useToastTransition";
+import type { Reason } from "~/remix-app";
 import { authenticator } from "~/services/auth.server";
 import { supabase } from "~/services/supabase.server";
 
@@ -10,35 +19,39 @@ export const links: LinksFunction = () => {
 };
 
 export const action: ActionFunction = async ({ request }) => {
-  const form = await request.formData();
-  const title = form.get("title");
-  const body = form.get("body");
-
   const user = await authenticator.isAuthenticated(request);
 
-  const { data, error } = await supabase
+  const form = await request.formData();
+  const mood = form.get("mood");
+  const reasons_ids = [...form.getAll("reasons")];
+
+  const { error } = await supabase
     .from("checks")
-    .insert({ title, body, author: user?.data?.id });
+    .insert({ value: mood, reasons_ids, user_id: user?.data?.id });
 
-  console.log(data, error);
+  if (error) {
+    return json({ message: error.message });
+  }
 
-  return null;
+  return redirect("/checks");
+};
+
+export const loader: LoaderFunction = async ({ request }) => {
+  const { body, error } = await supabase.from<Reason>("reasons").select();
+
+  // TODO: Show empty state or error
+  if (error) return json({ error: true });
+
+  return json({ reasons: body });
 };
 
 const CreateCheck = () => {
-  return (
-    <div className="-mt-12 flex h-screen items-center justify-center">
-      <div className="w-full px-4 py-8 sm:px-6 lg:px-8">
-        <div className="relative rounded-lg border border-gray-200 p-6 text-center">
-          <MoodForm />
-          <Form
-            method="post"
-            className="mx-auto mt-8 mb-0 max-w-md space-y-4"
-          ></Form>
-        </div>
-      </div>
-    </div>
-  );
+  const data = useActionData();
+  const { state } = useTransition();
+
+  useToastTransition(data?.message);
+
+  return <MoodForm disabled={state === "loading" || state === "submitting"} />;
 };
 
 export default CreateCheck;
