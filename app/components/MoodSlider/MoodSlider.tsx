@@ -55,24 +55,20 @@ export const getMoodLabelByValue = (value: string) => {
 };
 
 type MoodSliderProps = {
+  value: string;
   // TODO: Maybe convert to number?
   onChange: (value: string) => void;
 };
 
-const MoodSlider = ({ onChange }: MoodSliderProps) => {
-  const defaultValue = "3";
-
-  const [value, setValue] = useState<string>(defaultValue);
+const MoodSlider = ({ value, onChange }: MoodSliderProps) => {
   const [color, setColor] = useState<string>(getMoodColorByValue(value));
 
   useEffect(() => {
-    onChange(value);
+    setColor(getMoodColorByValue(value));
   }, [onChange, value]);
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setValue(e.target.value);
-    setColor(getMoodColorByValue(e.target.value));
-  };
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) =>
+    onChange(e.target.value);
 
   return (
     <div className="flex flex-col space-y-4">
