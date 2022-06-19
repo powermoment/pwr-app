@@ -71,8 +71,8 @@ const MoodSlider = ({ value, onChange }: MoodSliderProps) => {
     onChange(e.target.value);
 
   return (
-    <div className="flex flex-col space-y-4">
-      <span className="mr-auto">{getMoodLabelByValue(value)}</span>
+    <div className="flex flex-col items-center space-y-6">
+      <span>{getMoodLabelByValue(value)}</span>
       <div className="moodSlider" style={{ color }}>
         <input
           type="range"
