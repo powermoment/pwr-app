@@ -15,7 +15,7 @@
   -webkit-animation: wobble calc(150ms * var(--t)) linear infinite;
   animation: wobble calc(150ms * var(--t)) linear infinite;
   transform-origin: -var(--y) -var(--x);
-  box-shadow: 0 0 0.5em 0.2em #cecece inset, 0 0 0.15em 0 #fff;
+  box-shadow: 0 0 0.5em 0.15em #fff inset, 0 0 0.15em 0 #fff;
   display: flex;
   align-items: center;
   justify-content: center;
