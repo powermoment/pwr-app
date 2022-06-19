@@ -1,13 +1,12 @@
 import type { ActionFunction, LinksFunction } from "@remix-run/node";
 import { Form } from "@remix-run/react";
-import MoodSlider, {
-  links as moodSliderLinks,
-} from "~/components/MoodSlider/MoodSlider";
+import MoodForm, { links as moodFormLinks } from "~/components/MoodForm";
+
 import { authenticator } from "~/services/auth.server";
 import { supabase } from "~/services/supabase.server";
 
 export const links: LinksFunction = () => {
-  return [...moodSliderLinks()];
+  return [...moodFormLinks()];
 };
 
 export const action: ActionFunction = async ({ request }) => {
@@ -30,7 +29,7 @@ const CreateCheck = () => {
   return (
     <div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 lg:px-8">
       <div className="relative rounded-lg border border-gray-200 p-4 text-center">
-        <MoodSlider />
+        <MoodForm />
         <Form
           method="post"
           className="mx-auto mt-8 mb-0 max-w-md space-y-4"
