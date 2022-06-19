@@ -23,12 +23,12 @@ const Menu = ({ currentId, items, onChange }: MenuProps) => {
   };
 
   return (
-    <div className="w-80">
-      <nav className="flex flex-col space-y-1 px-6">
+    <div className="md:w-80">
+      <nav className="flex flex-col space-y-1 mb-6 md:px-6">
         <div className="ml-auto mb-2 mr-6 flex items-center space-x-4 hover:space-x-1">
           <Link
             to="/reasons/create"
-            className="z-10 block rounded-full border-2 border-white bg-green-100 p-4 text-green-700 transition-all hover:scale-110 focus:outline-none focus:ring active:bg-green-50"
+            className="z-10 block rounded-full border-2 border-white bg-pwr p-3 text-black transition-all hover:scale-110 focus:outline-none focus:ring active:bg-green-50"
             type="button"
           >
             <svg
