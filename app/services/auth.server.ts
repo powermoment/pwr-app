@@ -18,7 +18,7 @@ authenticator.use(
 
     if (type === "sign_up") {
       const { data } = await supabase
-        .from("profiles")
+        .from("users")
         .select()
         .eq("username", username)
         .single();
@@ -32,7 +32,7 @@ authenticator.use(
     if (signError) throw new Error(signError.message);
 
     const { data, error: updateError } = await supabaseAdmin
-      .from("profiles")
+      .from("users")
       .upsert(
         type === "sign_in"
           ? {
@@ -76,7 +76,7 @@ authenticator.use(
       };
 
       const { data, error } = await supabaseAdmin
-        .from("profiles")
+        .from("users")
         .upsert(updates, {
           onConflict: "email",
         })
