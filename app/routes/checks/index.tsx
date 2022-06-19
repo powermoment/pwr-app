@@ -1,11 +1,20 @@
 import type { LoaderFunction } from "@remix-run/node";
+import { redirect } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import type { Check } from "~/remix-app";
+import { authenticator } from "~/services/auth.server";
 import { supabase } from "~/services/supabase.server";
 
 export const loader: LoaderFunction = async ({ request }) => {
-  const { body, error } = await supabase.from<Check>("checks").select();
+  // TODO: Move to role helpers
+  const user = await authenticator.isAuthenticated(request);
+  if (!user?.data) return redirect("/");
+
+  const { body, error } = await supabase
+    .from<Check>("checks")
+    .select()
+    .eq("user_id", user?.data?.id);
 
   // TODO: Show empty state or error
   if (error) return json({ error: true });

@@ -37,6 +37,10 @@ export const action: ActionFunction = async ({ request }) => {
 };
 
 export const loader: LoaderFunction = async ({ request }) => {
+  // TODO: Move to role helpers
+  const user = await authenticator.isAuthenticated(request);
+  if (!user?.data) return redirect("/");
+
   const { body, error } = await supabase.from<Reason>("reasons").select();
 
   // TODO: Show empty state or error
