@@ -18,7 +18,7 @@ export const useToastTransition = (message: string) => {
       toast.remove(toastId);
       setToastId(undefined);
 
-      if (message) toast.error(message);
+      if (message) toast.error(message, { duration: 3000 });
     }
 
     return () => toast.remove(toastId);
