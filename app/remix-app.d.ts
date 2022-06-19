@@ -12,6 +12,12 @@ export type DBUser = {
 
 // TODO: Move at another .d.ts file
 export type Reason = { id: string; name: string };
+export type Check = {
+  id: string;
+  reason_ids: string[];
+  value: number;
+  user_id: string;
+};
 
 export type AuthenticatedUser = {
   user: Session | User | null;
