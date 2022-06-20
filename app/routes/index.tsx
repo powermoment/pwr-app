@@ -5,10 +5,18 @@ import PWRLogo from "~/components/PWRLogo";
 import PWRSlogan from "~/components/PWRSlogan";
 import UnDraw from "~/components/UnDraw";
 import { authenticator } from "~/services/auth.server";
+import { commitSession, getSession } from "~/services/session.server";
 
+// TODO: Maybe more clear redirect?
 export const loader: LoaderFunction = async ({ request }) => {
   const user = await authenticator.isAuthenticated(request);
-  if (user) return redirect("/checks", 302);
+  let session = await getSession(request.headers.get("cookie"));
+
+  if (user)
+    return redirect("/checks", {
+      headers: { "Set-Cookie": await commitSession(session) },
+    });
+
   return null;
 };
 
