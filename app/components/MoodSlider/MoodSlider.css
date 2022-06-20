@@ -27,16 +27,16 @@
   right: 0;
   width: 100%;
   color: currentColor;
-  transition: color 0.25s;
+  transition: color 0.35s;
 }
 
 .moodSlider__input::-webkit-slider-thumb {
   position: relative;
-  height: 1.8em;
-  width: 1.8em;
+  height: 1.9em;
+  width: 1.9em;
   margin-top: -0.8em;
   background: currentColor;
   border-radius: 50%;
-  transition: color 0.25s;
+  transition: color 0.35s;
   border: 6px solid #4b556388;
 }

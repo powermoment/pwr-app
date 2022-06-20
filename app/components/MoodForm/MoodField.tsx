@@ -31,7 +31,7 @@ const MoodField = ({ onSubmit }: MoodFieldProps) => {
         <button
           type="button"
           onClick={handleSubmit}
-          className="group relative inline-block w-full text-sm font-medium text-pwr focus:outline-none focus:ring active:text-pwr"
+          className="group transition-all duration-500 relative inline-block w-full text-sm font-medium text-pwr focus:outline-none focus:ring active:text-pwr"
         >
           <span
             style={{
