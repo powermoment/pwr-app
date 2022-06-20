@@ -20,13 +20,14 @@ import styles from "./styles/app.css";
 
 export const meta: MetaFunction = () => ({
   charset: "utf-8",
-  title: "New Remix App",
+  title: "PowerMoment",
   viewport: "width=device-width,initial-scale=1",
 });
 
 export const links: LinksFunction = () => {
   return [
     { rel: "stylesheet", href: styles },
+    { rel: "icon", type: "image/png", href: "favicon.png" },
     {
       rel: "preconnect",
       href: "https://fonts.gstatic.com",
