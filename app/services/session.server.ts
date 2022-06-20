@@ -1,14 +1,18 @@
 import { createCookieSessionStorage } from "@remix-run/node";
 
+const getExpiresDate = () => {
+  // FYI: 604800 - one week in seconds
+  return new Date(Date.now() + 604800 * 1000);
+};
+
 export let sessionStorage = createCookieSessionStorage({
   cookie: {
     name: "_session",
     sameSite: "lax",
     path: "/",
     httpOnly: true,
-    // replace this with an actual secret
-    secrets: ["s3cr3t"],
-    // enable this in prod only
+    secrets: [process.env.SESSION_SECRET],
+    expires: getExpiresDate(),
     secure: process.env.NODE_ENV === "production",
   },
 });
