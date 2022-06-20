@@ -15,8 +15,22 @@ const ReasonsField = () => {
           className="group relative inline-block w-full text-sm font-medium text-pwr focus:outline-none focus:ring active:text-pwr"
         >
           <span className="absolute inset-0 translate-x-0 translate-y-0 bg-pwr transition-transform group-hover:translate-y-0.5 group-hover:translate-x-0.5"></span>
-          <span className="relative block border border-current bg-white px-8 py-3 text-pwr">
+          <span className="relative flex justify-center border-2 border-current bg-white px-8 py-3 text-pwr">
             Отправить
+            <svg
+              className="ml-3 h-5 w-5"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M17 8l4 4m0 0l-4 4m4-4H3"
+              />
+            </svg>
           </span>
         </button>
       </div>
