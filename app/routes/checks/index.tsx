@@ -6,6 +6,7 @@ import type { Check } from "~/remix-app";
 import { authenticator } from "~/services/auth.server";
 import { supabase } from "~/services/supabase.server";
 
+// TODO: Fix load user data after login redirect
 export const loader: LoaderFunction = async ({ request }) => {
   // TODO: Move to role helpers
   const user = await authenticator.isAuthenticated(request);
