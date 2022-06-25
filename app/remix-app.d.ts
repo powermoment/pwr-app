@@ -14,6 +14,7 @@ export type DBUser = {
 export type Reason = { id: string; name: string };
 export type Check = {
   id: string;
+  created_at: string;
   reason_ids: string[];
   value: number;
   user_id: string;
