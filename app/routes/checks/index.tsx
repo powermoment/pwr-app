@@ -2,6 +2,7 @@ import type { LoaderFunction } from "@remix-run/node";
 import { redirect } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
+import { Last7Days } from "~/components/chars/Last7Days";
 import type { Check } from "~/remix-app";
 import { authenticator } from "~/services/auth.server";
 import { supabase } from "~/services/supabase.server";
@@ -24,16 +25,14 @@ export const loader: LoaderFunction = async ({ request }) => {
 };
 
 const Checks = () => {
-  const data = useLoaderData();
+  const { checks } = useLoaderData<{ checks: Check[] }>();
 
   return (
     <div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 lg:px-8">
-      <div className="relative rounded-lg border border-gray-200 p-8 text-center">
-        <h2 className="text-2xl font-medium">There's nothing here...</h2>
-        <p className="mt-4 text-sm text-gray-500">
-          Created checkouts will appear here, try creating one!
-        </p>
-        {JSON.stringify(data)}
+      <div className="flex h-screen min-h-full flex-col rounded-lg border border-gray-200 p-8">
+        <div className="flex-auto">
+          <Last7Days checks={checks} />
+        </div>
       </div>
     </div>
   );
