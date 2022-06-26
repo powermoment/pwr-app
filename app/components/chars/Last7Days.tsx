@@ -35,7 +35,6 @@ export const Last7Days = ({ checks }: Last7DaysProps) => {
   const primaryAxis = React.useMemo(
     (): AxisOptions<Check> => ({
       getValue: (datum) => formatDate(new Date(datum.created_at)),
-      elementType: "line",
     }),
     []
   );
@@ -44,7 +43,7 @@ export const Last7Days = ({ checks }: Last7DaysProps) => {
     (): AxisOptions<Check>[] => [
       {
         getValue: (datum) => new Date(datum.created_at).getHours(),
-        elementType: "line",
+        elementType: "bubble",
         stacked: true,
       },
     ],
@@ -73,6 +72,11 @@ export const Last7Days = ({ checks }: Last7DaysProps) => {
           },
         },
         defaultColors: ["#E6C37D"],
+        interactionMode: "closest",
+        getDatumStyle: (datum) =>
+          ({
+            circle: { r: datum.originalDatum.value },
+          } as any),
       }}
     />
   );
