@@ -2,10 +2,12 @@ import type { LoaderFunction } from "@remix-run/node";
 import { redirect } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
+import subDays from "date-fns/subDays";
 import { useMemo } from "react";
 import { Last7Days } from "~/components/chars/Last7Days";
 import SingleDay from "~/components/chars/SingleDay";
 import Tabs from "~/components/Tabs";
+import { getChecksByDay } from "~/helpers/checks";
 import type { Check } from "~/remix-app";
 import { authenticator } from "~/services/auth.server";
 import { supabase } from "~/services/supabase.server";
@@ -29,12 +31,40 @@ export const loader: LoaderFunction = async ({ request }) => {
 
 const Checks = () => {
   const { checks } = useLoaderData<{ checks: Check[] }>();
+
+  const todayChecks = useMemo(
+    () => getChecksByDay(checks, new Date()),
+    [checks]
+  );
+
+  const yesterdayChecks = useMemo(
+    () => getChecksByDay(checks, subDays(new Date(), 1)),
+    [checks]
+  );
+
   const tabs = useMemo(
     () => [
       {
         id: "currentDay",
         name: "Current Day",
-        render: () => <SingleDay />,
+        render: () => (
+          <div className="flex h-screen min-h-full">
+            <div className="flex-auto">
+              <SingleDay checks={todayChecks} />{" "}
+            </div>
+          </div>
+        ),
+      },
+      {
+        id: "yesterday",
+        name: "Yesterday",
+        render: () => (
+          <div className="flex h-screen min-h-full">
+            <div className="flex-auto">
+              <SingleDay checks={yesterdayChecks} />
+            </div>
+          </div>
+        ),
       },
       {
         id: "last7Days",
