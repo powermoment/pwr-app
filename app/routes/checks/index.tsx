@@ -45,8 +45,8 @@ const Checks = () => {
   const tabs = useMemo(
     () => [
       {
-        id: "currentDay",
-        name: "Current Day",
+        id: "today",
+        name: "Today",
         render: () => (
           <div className="flex h-screen min-h-full">
             <div className="flex-auto">
