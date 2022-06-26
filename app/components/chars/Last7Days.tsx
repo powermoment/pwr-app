@@ -12,6 +12,7 @@ type Series = {
   data: Check[];
 };
 
+// TODO: Holy shit, replace this with date-fns!
 const LOCALE = "ru-RU"; // Or "en-US"
 const formatDate = (date: Date) => {
   const options: Intl.DateTimeFormatOptions = {
