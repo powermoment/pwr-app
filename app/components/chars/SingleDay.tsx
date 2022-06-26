@@ -12,6 +12,7 @@ type Series = {
   data: Check[];
 };
 
+// FYI: If checks = [], it breaks, idk why, but should fixed
 const SingleDay = ({ checks }: SingleDayProps) => {
   const data: Series[] = [{ data: checks }];
 
