@@ -8,7 +8,6 @@ type Last7DaysProps = {
 };
 
 type Series = {
-  label: string;
   data: Check[];
 };
 
@@ -26,12 +25,7 @@ const formatDate = (date: Date) => {
 };
 
 export const Last7Days = ({ checks }: Last7DaysProps) => {
-  const data: Series[] = [
-    {
-      label: "React Charts",
-      data: checks,
-    },
-  ];
+  const data: Series[] = [{ data: checks }];
 
   const primaryAxis = React.useMemo(
     (): AxisOptions<Check> => ({
