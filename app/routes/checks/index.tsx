@@ -2,7 +2,10 @@ import type { LoaderFunction } from "@remix-run/node";
 import { redirect } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
+import { useMemo } from "react";
 import { Last7Days } from "~/components/chars/Last7Days";
+import SingleDay from "~/components/chars/SingleDay";
+import Tabs from "~/components/Tabs";
 import type { Check } from "~/remix-app";
 import { authenticator } from "~/services/auth.server";
 import { supabase } from "~/services/supabase.server";
@@ -26,13 +29,32 @@ export const loader: LoaderFunction = async ({ request }) => {
 
 const Checks = () => {
   const { checks } = useLoaderData<{ checks: Check[] }>();
+  const tabs = useMemo(
+    () => [
+      {
+        id: "currentDay",
+        name: "Current Day",
+        render: () => <SingleDay />,
+      },
+      {
+        id: "last7Days",
+        name: "Last 7 Days",
+        render: () => (
+          <div className="flex h-screen min-h-full">
+            <div className="flex-auto">
+              <Last7Days checks={checks} />
+            </div>
+          </div>
+        ),
+      },
+    ],
+    [checks]
+  );
 
   return (
     <div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 lg:px-8">
-      <div className="flex h-screen min-h-full flex-col rounded-lg border border-gray-200 p-8">
-        <div className="flex-auto">
-          <Last7Days checks={checks} />
-        </div>
+      <div className="rounded-lg border border-gray-200 p-8">
+        <Tabs tabs={tabs} />
       </div>
     </div>
   );
