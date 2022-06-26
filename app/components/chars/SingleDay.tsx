@@ -20,6 +20,7 @@ const SingleDay = ({ checks }: SingleDayProps) => {
       getValue: (datum) => format(new Date(datum.created_at), "HH:mm:ss"),
       elementType: "line",
       showDatumElements: true,
+      position: "top",
     }),
     []
   );
