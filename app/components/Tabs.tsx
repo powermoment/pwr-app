@@ -43,7 +43,7 @@ const Tabs = ({ tabs }: TabsProps) => {
               key={category.id}
               className={classNames(
                 "rounded-xl bg-white p-3",
-                "ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2"
+                "ring-white ring-opacity-60 ring-offset-2 ring-offset-pwr/40 focus:outline-none focus:ring-2"
               )}
             >
               {category.render()}

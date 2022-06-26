@@ -4,6 +4,7 @@ import { json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import subDays from "date-fns/subDays";
 import { useMemo } from "react";
+import Empty from "~/components/chars/Empty";
 import { Last7Days } from "~/components/chars/Last7Days";
 import SingleDay from "~/components/chars/SingleDay";
 import Tabs from "~/components/Tabs";
@@ -50,7 +51,11 @@ const Checks = () => {
         render: () => (
           <div className="flex h-screen min-h-full">
             <div className="flex-auto">
-              <SingleDay checks={todayChecks} />{" "}
+              {todayChecks.length ? (
+                <SingleDay checks={todayChecks} />
+              ) : (
+                <Empty />
+              )}
             </div>
           </div>
         ),
@@ -61,7 +66,11 @@ const Checks = () => {
         render: () => (
           <div className="flex h-screen min-h-full">
             <div className="flex-auto">
-              <SingleDay checks={yesterdayChecks} />
+              {yesterdayChecks.length ? (
+                <SingleDay checks={yesterdayChecks} />
+              ) : (
+                <Empty />
+              )}
             </div>
           </div>
         ),
@@ -78,7 +87,7 @@ const Checks = () => {
         ),
       },
     ],
-    [checks]
+    [todayChecks, yesterdayChecks, checks]
   );
 
   return (
