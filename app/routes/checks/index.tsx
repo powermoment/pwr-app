@@ -92,7 +92,7 @@ const Checks = () => {
 
   return (
     <div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 lg:px-8">
-      <div className="rounded-lg border border-gray-200 p-8">
+      <div className="rounded-lg border border-gray-200 p-4 md:p-8">
         <Tabs tabs={tabs} />
       </div>
     </div>

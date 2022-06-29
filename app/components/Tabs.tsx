@@ -37,12 +37,12 @@ const Tabs = ({ tabs }: TabsProps) => {
             </Tab>
           ))}
         </Tab.List>
-        <Tab.Panels className="mt-2">
+        <Tab.Panels className="mt-8 md:mt-12">
           {categories.map((category) => (
             <Tab.Panel
               key={category.id}
               className={classNames(
-                "rounded-xl bg-white p-3",
+                "rounded-xl bg-white p-0 md:p-4",
                 "ring-white ring-opacity-60 ring-offset-2 ring-offset-pwr/40 focus:outline-none focus:ring-2"
               )}
             >
