@@ -2,6 +2,8 @@ import format from "date-fns/format";
 import React from "react";
 import type { AxisOptions, DatumStyles } from "react-charts";
 import { Chart } from "react-charts";
+import { getMoodColorByValue } from "~/helpers/colors";
+import { getDatumRadiusByValue } from "~/helpers/datum";
 import type { Check } from "~/remix-app";
 
 type SingleDayProps = {
@@ -32,6 +34,7 @@ const SingleDay = ({ checks }: SingleDayProps) => {
         getValue: (datum) => datum.value,
         stacked: true,
         tickCount: 6,
+        showDatumElements: true,
         elementType: "line",
       },
     ],
@@ -49,9 +52,7 @@ const SingleDay = ({ checks }: SingleDayProps) => {
             return (
               <div className="overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
                 <div className="bg-gray-50 p-4">
-                  Date: {props.focusedDatum?.primaryValue}
-                  <br />
-                  Hour: {props.focusedDatum?.secondaryValue}
+                  Time: {props.focusedDatum?.primaryValue}
                   <br />
                   Value: {props.focusedDatum?.originalDatum.value}
                 </div>
@@ -61,8 +62,15 @@ const SingleDay = ({ checks }: SingleDayProps) => {
         },
         defaultColors: ["#E6C37D"],
         getDatumStyle: (datum) => {
+          const value = datum.originalDatum.value;
+
           return {
-            circle: { r: datum.originalDatum.value },
+            circle: {
+              r: getDatumRadiusByValue(value),
+              stroke: getMoodColorByValue(value),
+              strokeWidth: 4,
+              fill: '#ffffff'
+            },
           } as DatumStyles;
         },
       }}
