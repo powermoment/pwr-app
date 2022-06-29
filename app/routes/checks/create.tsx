@@ -64,15 +64,13 @@ const CreateCheck = () => {
 
   return (
     <>
-      <div className="w-full px-4 mb-8">
+      <div className="mb-8 w-full px-4 md:px-6">
         <h5 className="text-lg font-bold text-gray-600">
           Rate Your Productivity
           <br />
           at
         </h5>
-        <h4 className="text-3xl font-bold text-gray-700">
-          22:11
-        </h4>
+        <h4 className="text-3xl font-bold text-gray-700">22:11</h4>
       </div>
       <MoodForm disabled={state === "loading" || state === "submitting"} />
     </>

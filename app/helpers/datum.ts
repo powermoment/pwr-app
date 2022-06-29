@@ -4,20 +4,20 @@
 export const getDatumRadiusByValue = (value?: number) => {
   switch (value) {
     case 0:
-      return 5;
+      return 3;
     case 1:
-      return 6;
+      return 3.5;
     case 2:
-      return 7;
+      return 4;
     case 3:
-      return 8;
+      return 5.5;
     case 4:
-      return 9;
+      return 6;
     case 5:
-      return 10;
+      return 6.5;
     case 6:
-      return 11;
+      return 7;
     default:
-      return 5;
+      return 3;
   }
 };
