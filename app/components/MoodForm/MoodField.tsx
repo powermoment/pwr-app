@@ -25,6 +25,9 @@ const MoodField = ({ onSubmit }: MoodFieldProps) => {
 
   return (
     <div className="flex flex-col space-y-16">
+      <span className="text-lg text-gray-600">
+        Насколько продуктивным ощущаете себя?
+      </span>
       <Wooble color={color} />
       <MoodSlider value={moodValue} onChange={handleMoodChange} />
       <div className="flex">

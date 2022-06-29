@@ -5,7 +5,10 @@ const ReasonsField = () => {
   const { reasons } = useLoaderData();
 
   return (
-    <div className="flex flex-col space-y-6 rounded-lg border border-gray-200 p-6 text-center">
+    <div className="flex flex-col space-y-6 rounded-lg border border-gray-200 p-6">
+      <span className="text-lg text-gray-600">
+        Какие события были?
+      </span>
       <div className="flex flex-wrap gap-4">
         <ReasonsSelect reasons={reasons} />
       </div>

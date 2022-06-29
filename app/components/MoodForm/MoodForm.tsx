@@ -27,9 +27,6 @@ const MoodForm = ({ disabled }: MoodFormProps) => {
         method="post"
         className="w-full space-y-8 px-4 py-8 sm:px-6 lg:px-8"
       >
-        <div className="relative rounded-lg border border-gray-200 p-6 text-center">
-          <MoodField onSubmit={handleMoodSubmit} />
-        </div>
         <Transition
           show={showReasons}
           enter="transition ease-out duration-100"
@@ -41,6 +38,9 @@ const MoodForm = ({ disabled }: MoodFormProps) => {
         >
           <ReasonsField />
         </Transition>
+        <div className="relative rounded-lg border border-gray-200 p-6">
+          <MoodField onSubmit={handleMoodSubmit} />
+        </div>
       </Form>
     </div>
   );
