@@ -1,4 +1,4 @@
-import type { PropsWithChildren, ReactElement} from "react";
+import type { PropsWithChildren, ReactElement } from "react";
 import { useMemo } from "react";
 import AppHeader from "./AppHeader";
 import type { AuthenticatedUser } from "~/remix-app";

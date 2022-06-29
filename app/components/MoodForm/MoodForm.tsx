@@ -21,7 +21,7 @@ const MoodForm = ({ disabled }: MoodFormProps) => {
     <div
       className={`${
         disabled ? "pointer-events-none animate-pulse" : ""
-      } transition-margin duration-250 -mt-12 flex h-screen items-center justify-center transition-all`}
+      } transition-margin duration-250 flex items-center justify-center transition-all`}
     >
       <Form
         method="post"
