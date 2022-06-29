@@ -3,61 +3,16 @@ import { useEffect, useState } from "react";
 import type { ChangeEvent } from "react";
 
 import moodSliderStyles from "./MoodSlider.css";
+import { getMoodColorByValue } from "~/helpers/colors";
+import { getMoodLabelByValue } from "~/helpers/typos";
 
 export const links: LinksFunction = () => {
   return [{ rel: "stylesheet", href: moodSliderStyles }];
 };
 
-// Palette from Ant.d
-// https://ant.design/docs/spec/colors
-export const getMoodColorByValue = (value?: string) => {
-  switch (value) {
-    case "0":
-      return "#9254de";
-    case "1":
-      return "#f759ab";
-    case "2":
-      return "#ff4d4f";
-    case "3":
-      // PowerMoment primary color
-      return "#E6C37D";
-    case "4":
-      return "#40a9ff";
-    case "5":
-      return "#36cfc9";
-    case "6":
-      return "#73d13d";
-    default:
-      // Like at 0 value
-      return "#9254de";
-  }
-};
-
-export const getMoodLabelByValue = (value: string) => {
-  switch (value) {
-    case "0":
-      return "Ужасное";
-    case "1":
-      return "Плохое";
-    case "2":
-      return "Не очень";
-    case "3":
-      return "Нормальное";
-    case "4":
-      return "Хорошее";
-    case "5":
-      return "Отличное";
-    case "6":
-      return "Прекрасное";
-    default:
-      return "Не удалось определить";
-  }
-};
-
 type MoodSliderProps = {
-  value: string;
-  // TODO: Maybe convert to number?
-  onChange: (value: string) => void;
+  value: number;
+  onChange: (value: number) => void;
 };
 
 const MoodSlider = ({ value, onChange }: MoodSliderProps) => {
@@ -68,7 +23,7 @@ const MoodSlider = ({ value, onChange }: MoodSliderProps) => {
   }, [onChange, value]);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) =>
-    onChange(e.target.value);
+    onChange(e.target.valueAsNumber);
 
   return (
     <div className="flex flex-col items-center space-y-6">

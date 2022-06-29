@@ -1,26 +1,26 @@
 import type { LinksFunction } from "@remix-run/node";
 import { useMemo, useState } from "react";
 import MoodSlider, {
-  getMoodColorByValue,
   links as moodSliderLinks,
 } from "~/components/MoodSlider/MoodSlider";
 import Wooble, { links as woobleStyles } from "~/components/Wooble/Wooble";
+import { getMoodColorByValue } from "~/helpers/colors";
 
 export const links: LinksFunction = () => {
   return [...moodSliderLinks(), ...woobleStyles()];
 };
 
 type MoodFieldProps = {
-  onSubmit: (value: string) => void;
+  onSubmit: (value: number) => void;
 };
 
-const DEFAULT_VALIE = "3";
+const DEFAULT_VALIE = 3;
 
 const MoodField = ({ onSubmit }: MoodFieldProps) => {
-  const [moodValue, setMoodValue] = useState<string>(DEFAULT_VALIE);
+  const [moodValue, setMoodValue] = useState<number>(DEFAULT_VALIE);
   const color = useMemo(() => getMoodColorByValue(moodValue), [moodValue]);
 
-  const handleMoodChange = (value: string) => setMoodValue(value);
+  const handleMoodChange = (value: number) => setMoodValue(value);
   const handleSubmit = () => onSubmit(moodValue);
 
   return (
@@ -31,7 +31,7 @@ const MoodField = ({ onSubmit }: MoodFieldProps) => {
         <button
           type="button"
           onClick={handleSubmit}
-          className="group transition-all duration-500 relative inline-block w-full text-sm font-medium text-pwr focus:outline-none focus:ring active:text-pwr"
+          className="group relative inline-block w-full text-sm font-medium text-pwr transition-all duration-500 focus:outline-none focus:ring active:text-pwr"
         >
           <span
             style={{
