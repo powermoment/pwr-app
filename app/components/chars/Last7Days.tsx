@@ -1,6 +1,8 @@
 import React from "react";
-import type { AxisOptions } from "react-charts";
+import type { AxisOptions, DatumStyles } from "react-charts";
 import { Chart } from "react-charts";
+import { getMoodColorByValue } from "~/helpers/colors";
+import { getDatumRadiusByValue } from "~/helpers/datum";
 import type { Check } from "~/remix-app";
 
 type Last7DaysProps = {
@@ -68,10 +70,17 @@ export const Last7Days = ({ checks }: Last7DaysProps) => {
         },
         defaultColors: ["#E6C37D"],
         interactionMode: "closest",
-        getDatumStyle: (datum) =>
-          ({
-            circle: { r: datum.originalDatum.value },
-          } as any),
+        getDatumStyle: (datum) => {
+          const value = datum.originalDatum.value;
+
+          return {
+            circle: {
+              r: getDatumRadiusByValue(value),
+              strokeWidth: 0,
+              fill: getMoodColorByValue(value),
+            },
+          } as DatumStyles;
+        },
       }}
     />
   );
