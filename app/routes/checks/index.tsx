@@ -9,7 +9,7 @@ import { Last7Days } from "~/components/chars/Last7Days";
 import SingleDay from "~/components/chars/SingleDay";
 import Tabs from "~/components/Tabs";
 import { getChecksByDay } from "~/helpers/checks";
-import type { Check } from "~/remix-app";
+import type { Breadcrumb, Check } from "~/remix-app";
 import { authenticator } from "~/services/auth.server";
 import { supabase } from "~/services/supabase.server";
 
@@ -28,6 +28,10 @@ export const loader: LoaderFunction = async ({ request }) => {
   if (error) return json({ error: true });
 
   return json({ checks: body });
+};
+
+export const handle = {
+  breadcrumb: (): Breadcrumb[] => [{ title: "Checks", to: "/checks" }],
 };
 
 const Checks = () => {

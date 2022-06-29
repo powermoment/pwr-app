@@ -4,7 +4,7 @@ import { redirect } from "@remix-run/node";
 import { Outlet, useLoaderData } from "@remix-run/react";
 import { useMemo, useState } from "react";
 import Menu from "~/components/Menu";
-import type { Reason } from "~/remix-app";
+import type { Breadcrumb, Reason } from "~/remix-app";
 import { authenticator } from "~/services/auth.server";
 import { supabase } from "~/services/supabase.server";
 
@@ -22,6 +22,12 @@ export const loader: LoaderFunction = async ({ request, params }) => {
   if (error) return json({ error: true });
 
   return json(body);
+};
+
+export const handle = {
+  breadcrumb: (): Breadcrumb[] => [
+    { title: "Reasons", to: "/reasons" },
+  ],
 };
 
 const Reasons = () => {

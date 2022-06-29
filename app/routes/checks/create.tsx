@@ -10,7 +10,7 @@ import MoodForm, {
   links as moodFormLinks,
 } from "~/components/MoodForm/MoodForm";
 import { useToastTransition } from "~/hooks/useToastTransition";
-import type { Reason } from "~/remix-app";
+import type { Breadcrumb, Reason } from "~/remix-app";
 import { authenticator } from "~/services/auth.server";
 import { supabase } from "~/services/supabase.server";
 
@@ -47,6 +47,13 @@ export const loader: LoaderFunction = async ({ request }) => {
   if (error) return json({ error: true });
 
   return json({ reasons: body });
+};
+
+export const handle = {
+  breadcrumb: (): Breadcrumb[] => [
+    { title: "Checks", to: "/checks" },
+    { title: "Create", to: "/checks/create" },
+  ],
 };
 
 const CreateCheck = () => {

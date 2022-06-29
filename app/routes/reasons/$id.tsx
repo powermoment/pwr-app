@@ -8,7 +8,7 @@ import {
 } from "@remix-run/react";
 import { useEffect, useMemo, useState } from "react";
 import { useToastTransition } from "~/hooks/useToastTransition";
-import type { Reason } from "~/remix-app";
+import type { Breadcrumb, Reason } from "~/remix-app";
 import { supabase } from "~/services/supabase.server";
 
 const EMPTY_REASON = { name: "Reason name" };
@@ -31,6 +31,12 @@ export const action: ActionFunction = async ({ request }) => {
   if (error) return json({ message: error.message });
 
   return null;
+};
+
+export const handle = {
+  breadcrumb: (match: RouteMatch): Breadcrumb[] => [
+    { title: "Edit", to: match.pathname },
+  ],
 };
 
 const ReasonForm = () => {

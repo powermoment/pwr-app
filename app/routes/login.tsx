@@ -4,6 +4,7 @@ import { json } from "@remix-run/node";
 import { authenticator } from "~/services/auth.server";
 import { AuthorizationError } from "remix-auth";
 import { useToastTransition } from "~/hooks/useToastTransition";
+import type { Breadcrumb } from "~/remix-app";
 
 export const loader: LoaderFunction = async ({ request }) => {
   return await authenticator.isAuthenticated(request, {
@@ -22,6 +23,12 @@ export const action: ActionFunction = async ({ request }) => {
       return json({ success: false, message: error.message });
     return error;
   }
+};
+
+export const handle = {
+  breadcrumb: (): Breadcrumb[] => [
+    { title: "Log In", to: "/login" },
+  ],
 };
 
 export const Login = () => {
