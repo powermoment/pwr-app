@@ -20,7 +20,7 @@ const SingleDay = ({ checks }: SingleDayProps) => {
 
   const primaryAxis = React.useMemo(
     (): AxisOptions<Check> => ({
-      getValue: (datum) => format(new Date(datum.created_at), "HH:mm:ss"),
+      getValue: (datum) => format(new Date(datum.created_at), "HH:mm"),
       elementType: "line",
       showDatumElements: true,
       position: "top",
@@ -69,7 +69,8 @@ const SingleDay = ({ checks }: SingleDayProps) => {
               r: getDatumRadiusByValue(value),
               stroke: getMoodColorByValue(value),
               strokeWidth: 4,
-              fill: '#ffffff'
+              fill: '#ffffff',
+              opacity: 0.8
             },
           } as DatumStyles;
         },

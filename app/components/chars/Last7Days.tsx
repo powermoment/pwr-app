@@ -1,3 +1,4 @@
+import format from "date-fns/format";
 import React from "react";
 import type { AxisOptions, DatumStyles } from "react-charts";
 import { Chart } from "react-charts";
@@ -13,25 +14,14 @@ type Series = {
   data: Check[];
 };
 
-// TODO: Holy shit, replace this with date-fns!
-const LOCALE = "ru-RU"; // Or "en-US"
-const formatDate = (date: Date) => {
-  const options: Intl.DateTimeFormatOptions = {
-    weekday: "short",
-    year: "numeric",
-    month: "short",
-    day: "numeric",
-  };
-
-  return date.toLocaleString(LOCALE, options);
-};
-
 export const Last7Days = ({ checks }: Last7DaysProps) => {
   const data: Series[] = [{ data: checks }];
 
   const primaryAxis = React.useMemo(
     (): AxisOptions<Check> => ({
-      getValue: (datum) => formatDate(new Date(datum.created_at)),
+      // FYI: Do not forget about years?
+      getValue: (datum) => format(new Date(datum.created_at), "dd-MM"),
+      position: "top",
     }),
     []
   );
@@ -78,6 +68,7 @@ export const Last7Days = ({ checks }: Last7DaysProps) => {
               r: getDatumRadiusByValue(value),
               strokeWidth: 0,
               fill: getMoodColorByValue(value),
+              opacity: 0.8
             },
           } as DatumStyles;
         },
