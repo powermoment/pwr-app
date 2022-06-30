@@ -1,19 +1,19 @@
 export const getMoodLabelByValue = (value: number) => {
   switch (value) {
     case 0:
-      return "Ужасное";
+      return "Ужасно :(";
     case 1:
-      return "Плохое";
+      return "Плохо";
     case 2:
-      return "Не очень";
+      return "Ничего не делаю";
     case 3:
-      return "Нормальное";
+      return "Нормально";
     case 4:
-      return "Хорошее";
+      return "Хорошо";
     case 5:
-      return "Отличное";
+      return "Весь в делах!";
     case 6:
-      return "Прекрасное";
+      return "Прекрасно";
     default:
       return "Не удалось определить";
   }

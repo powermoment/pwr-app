@@ -6,6 +6,7 @@ import type {
 import { redirect } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { useActionData, useTransition } from "@remix-run/react";
+import format from "date-fns/format";
 import MoodForm, {
   links as moodFormLinks,
 } from "~/components/MoodForm/MoodForm";
@@ -70,7 +71,9 @@ const CreateCheck = () => {
           <br />
           at
         </h5>
-        <h4 className="text-3xl font-bold text-gray-700">22:11</h4>
+        <h4 className="text-3xl font-bold text-gray-700">
+          {format(new Date(), 'HH:mm')}
+        </h4>
       </div>
       <MoodForm disabled={state === "loading" || state === "submitting"} />
     </>
