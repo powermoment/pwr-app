@@ -85,7 +85,7 @@ const Checks = () => {
         render: () => (
           <div className="flex h-96 min-h-full">
             <div className="flex-auto">
-              <Last7Days checks={checks} />
+              {checks.length ? <Last7Days checks={checks} /> : <Empty />}
             </div>
           </div>
         ),
@@ -97,9 +97,7 @@ const Checks = () => {
   return (
     <>
       <div className="w-full px-4 md:px-6">
-        <h5 className="text-lg font-bold text-gray-600">
-          My Checks
-        </h5>
+        <h5 className="text-lg font-bold text-gray-600">My Checks</h5>
       </div>
       <div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 lg:px-8">
         <div className="rounded-lg border border-gray-200 p-4 md:p-8">
