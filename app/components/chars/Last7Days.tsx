@@ -22,6 +22,7 @@ export const Last7Days = ({ checks }: Last7DaysProps) => {
       // FYI: Do not forget about years?
       getValue: (datum) => format(new Date(datum.created_at), "dd-MM"),
       position: "top",
+      showGrid: false,
     }),
     []
   );
@@ -30,8 +31,14 @@ export const Last7Days = ({ checks }: Last7DaysProps) => {
     (): AxisOptions<Check>[] => [
       {
         getValue: (datum) => new Date(datum.created_at).getHours(),
+        elementType: "line",
+        showGrid: false,
+        showDatumElements: true,
+      },
+      {
+        getValue: (datum) => new Date(datum.created_at).getHours(),
         elementType: "bubble",
-        stacked: true,
+        show: true,
       },
     ],
     []
@@ -59,16 +66,17 @@ export const Last7Days = ({ checks }: Last7DaysProps) => {
           },
         },
         defaultColors: ["#E6C37D"],
-        interactionMode: "closest",
+        interactionMode: "primary",
         getDatumStyle: (datum) => {
           const value = datum.originalDatum.value;
 
           return {
             circle: {
               r: getDatumRadiusByValue(value),
-              strokeWidth: 0,
-              fill: getMoodColorByValue(value),
-              opacity: 0.8
+              strokeWidth: 1,
+              // stroke: getMoodColorByValue(value),
+              // fill: getMoodColorByValue(value),
+              opacity: 1,
             },
           } as DatumStyles;
         },
